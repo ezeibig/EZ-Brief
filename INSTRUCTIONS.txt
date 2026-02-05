@@ -1,0 +1,142 @@
+# EZ-Brief Research & Grounding System
+# Startup Instructions
+# =====================================================
+
+## PURPOSE
+
+This system builds substantive, credible expertise in target domains
+(CPG, Pharma, Hospitality, Retail, Luxury, Telecom) for thought leadership.
+It is NOT for job hunting—it's for learning and sharing insights credibly.
+
+## PROJECT STRUCTURE
+
+EZ-Brief/
+├── inputs/
+│   ├── relevance_scoring_rubric.md   # 17-point scoring methodology
+│   ├── rss_feeds.md                   # Master list of sources
+│   └── profile_summary.md             # Your profile context
+├── grounding/
+│   └── YYYY-MM-DD_scored_articles.md  # Weekly scored output
+├── logs/
+│   └── YYYY-MM-DD_run_log.md          # Processing logs
+└── INSTRUCTIONS.txt                    # This file
+
+
+## HOW TO RUN (Weekly)
+
+1. Open Claude Code in this directory:
+   cd /Users/eugeniazeibig/Desktop/AI-Resolution/EZ-Brief
+
+2. Start a new session and provide this prompt:
+
+   ---
+   Run the EZ-Brief weekly research grounding process:
+
+   1. Fetch all RSS feeds listed in inputs/rss_feeds.md
+   2. Score articles using inputs/relevance_scoring_rubric.md
+   3. Include only articles scoring ≥10
+   4. Output to grounding/[today's date]_scored_articles.md
+   5. Log results to logs/[today's date]_run_log.md
+
+   Use the output template format from the rubric file.
+   ---
+
+3. Review the scored_articles.md output
+4. Pass to Manus for synthesis (or review directly)
+
+
+## SCORING THRESHOLD
+
+- Score ≥14: CRITICAL - Deep read, extract claims with citations
+- Score 10-13: HIGH - Read and summarize, note key data points
+- Score 6-9: MEDIUM - Skim for signals (not included in output)
+- Score <6: Excluded
+
+
+## FEED MAINTENANCE
+
+Working Feeds (15):
+- McKinsey, FiercePharma, Retail Dive, Food Dive
+- Marketing AI Institute, ChiefMartec, TechCrunch AI
+- Shep Hyken, Stratechery, Lenny's Newsletter
+- MIT Technology Review, EU AI Act
+
+Non-Working Feeds (need manual newsletter signup):
+- Harvard Business Review (cert error)
+- Spencer Stuart, Russell Reynolds, Heidrick (no RSS)
+- a16z, Bessemer, CB Insights (no RSS or blocked)
+- Cassie Kozyrkov Medium (auth required)
+- CustomerBliss (stale - 2022)
+
+
+## RECOMMENDED CADENCE
+
+Weekly (Sunday or Monday)
+- Allows pattern recognition across articles
+- Better signal-to-noise ratio
+- Aligns with expertise building (not breaking news)
+
+
+## OUTPUT FORMAT REFERENCE
+
+Each scored article follows this structure:
+
+### [Article Title]
+**Source:** [Publication] | **Date:** YYYY-MM-DD | **Score:** X/17
+
+**Breakdown:**
+Industry [X] | Function [X] | Exec [X] | Evidence [X] | Source [X] | Recency [X] | Shareability [X]
+
+**Signal Type:** Leading | Confirming | Lagging | Contrarian | Structural
+**Time Horizon:** Immediate (0-6 mo) | Mid (6-24 mo) | Long (2-5 yr) | Evergreen
+**Impacted Roles / Functions:** [1-3 from controlled list]
+
+**Quotable Claims:**
+- "Exact quote" — Source
+
+**Key Data Points:**
+- Statistic — Source
+
+**Human Synthesis (Draft):**
+1-2 sentence framing for conversation
+
+
+## CONTROLLED VOCABULARIES
+
+Signal Types:
+- Leading: Early indicator of emerging trend
+- Confirming: Validates existing trend
+- Lagging: Documents something already widespread
+- Contrarian: Challenges prevailing narrative
+- Structural: Indicates lasting change
+
+Impacted Roles (select 1-3):
+- CMO
+- Customer Strategy
+- Customer Experience (CX)
+- Data & Analytics
+- Marketing Operations
+- Commercial/Revenue
+- Digital Transformation
+- AI/ML Leadership
+- Brand
+- Insights & Research
+- Agency/Partner Management
+
+
+## PRIORITIZATION RULES
+
+PREFER:
+- Evidence-backed claims (data, research citations)
+- Structural changes (org design, operating model)
+- Quantified trends with sources
+
+DE-PRIORITIZE:
+- Personal opinion without data
+- Vendor hype / promotional content
+- "Thought leadership" without evidence
+
+
+## LAST UPDATED
+
+February 3, 2026
