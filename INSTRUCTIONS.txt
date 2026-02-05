@@ -25,7 +25,7 @@ EZ-Brief/
 ## HOW TO RUN (Weekly)
 
 1. Open Claude Code in this directory:
-   cd /Users/eugeniazeibig/Desktop/AI-Resolution/EZ-Brief
+   cd "/Users/eugeniazeibig/Desktop/AI Resolution/EZ-Brief"
 
 2. Start a new session and provide this prompt:
 
@@ -36,13 +36,23 @@ EZ-Brief/
    2. Score articles using inputs/relevance_scoring_rubric.md
    3. Include only articles scoring ≥10
    4. Output to grounding/[today's date]_scored_articles.md
-   5. Log results to logs/[today's date]_run_log.md
+   5. Copy output to grounding/latest.md (overwrite)
+   6. Log results to logs/[today's date]_run_log.md
 
    Use the output template format from the rubric file.
    ---
 
 3. Review the scored_articles.md output
-4. Pass to Manus for synthesis (or review directly)
+4. Push to GitHub:
+   git add . && git commit -m "Week of YYYY-MM-DD" && git push
+5. Share with Manus using the fixed URL (see below)
+
+
+## MANUS URL (Fixed)
+
+https://raw.githubusercontent.com/ezeibig/EZ-Brief/main/grounding/latest.md
+
+This URL always points to the current week's scored articles.
 
 
 ## SCORING THRESHOLD
