@@ -14,9 +14,11 @@ EZ-Brief/
 ├── inputs/
 │   ├── relevance_scoring_rubric.md   # 17-point scoring methodology
 │   ├── rss_feeds.md                   # Master list of sources
-│   └── profile_summary.md             # Your profile context
+│   ├── profile_summary.md             # Your profile context
+│   └── weekly_prompt.md               # Workflow instructions (edit this to modify process)
 ├── grounding/
-│   └── YYYY-MM-DD_scored_articles.md  # Weekly scored output
+│   ├── YYYY-MM-DD_scored_articles.md  # Weekly scored output (archived)
+│   └── latest.md                      # Current week (fixed URL for Manus)
 ├── logs/
 │   └── YYYY-MM-DD_run_log.md          # Processing logs
 └── INSTRUCTIONS.txt                    # This file
@@ -24,28 +26,28 @@ EZ-Brief/
 
 ## HOW TO RUN (Weekly)
 
-1. Open Claude Code in this directory:
+**Option A: Automator App (one-click)**
+- Double-click the EZ-Brief app on your Desktop/Dock
+- Claude Code launches with the workflow prompt
+- Interact as needed, review output
+
+**Option B: Manual**
+1. Open Terminal:
    cd "/Users/eugeniazeibig/Desktop/AI Resolution/EZ-Brief"
 
-2. Start a new session and provide this prompt:
+2. Launch Claude Code:
+   claude "Run the weekly EZ-Brief process per inputs/weekly_prompt.md"
 
-   ---
-   Run the EZ-Brief weekly research grounding process:
+3. Review output and confirm git push
 
-   1. Fetch all RSS feeds listed in inputs/rss_feeds.md
-   2. Score articles using inputs/relevance_scoring_rubric.md
-   3. Include only articles scoring ≥10
-   4. Output to grounding/[today's date]_scored_articles.md
-   5. Copy output to grounding/latest.md (overwrite)
-   6. Log results to logs/[today's date]_run_log.md
 
-   Use the output template format from the rubric file.
-   ---
+## WORKFLOW CONFIGURATION
 
-3. Review the scored_articles.md output
-4. Push to GitHub:
-   git add . && git commit -m "Week of YYYY-MM-DD" && git push
-5. Share with Manus using the fixed URL (see below)
+All workflow logic lives in: `inputs/weekly_prompt.md`
+
+To modify the process (add RSS scraping, change scoring, etc.):
+- Edit `inputs/weekly_prompt.md`
+- The Automator app will use the updated instructions automatically
 
 
 ## MANUS URL (Fixed)
@@ -147,6 +149,39 @@ DE-PRIORITIZE:
 - "Thought leadership" without evidence
 
 
+## AUTOMATOR APP SETUP
+
+To create the one-click EZ-Brief launcher:
+
+1. Open Automator (Applications → Automator)
+2. Choose "Application" as document type
+3. Search for "Run AppleScript" and drag it to workflow
+4. Paste this script:
+
+   ```applescript
+   tell application "Terminal"
+       activate
+       do script "cd '/Users/eugeniazeibig/Desktop/AI Resolution/EZ-Brief' && claude 'Run the weekly EZ-Brief process per inputs/weekly_prompt.md'"
+   end tell
+   ```
+
+5. File → Save as "EZ-Brief" to Desktop (or Applications)
+6. Optional: Drag to Dock for quick access
+
+To change the app icon:
+- Find an icon you like (.icns file or image)
+- Right-click the app → Get Info
+- Drag image onto the icon in the top-left of the info window
+
+
+## GITHUB REPOSITORY
+
+https://github.com/ezeibig/EZ-Brief
+
+Push updates after each run:
+   git add . && git commit -m "Week of YYYY-MM-DD" && git push
+
+
 ## LAST UPDATED
 
-February 3, 2026
+February 4, 2026
