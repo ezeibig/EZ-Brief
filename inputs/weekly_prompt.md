@@ -2,6 +2,13 @@
 
 Run the EZ-Brief weekly research grounding process:
 
+## IMPORTANT: Performance Rules
+
+- **DO NOT fetch individual article URLs** - use RSS feed data only
+- If an RSS feed takes longer than 30 seconds, skip it and note in the log
+- Score articles based on RSS title, description, and summary fields
+- Speed over depth - completing the run is more important than exhaustive extraction
+
 ## Steps
 
 1. **Fetch RSS feeds** from `inputs/rss_feeds.md` (skip feeds marked as non-working)
@@ -35,8 +42,8 @@ Each scored article must include:
 - Signal Type (Leading/Confirming/Lagging/Contrarian/Structural)
 - Time Horizon (Immediate/Mid/Long/Evergreen)
 - Impacted Roles (1-3 from controlled list)
-- Quotable Claims with attribution
-- Key Data Points with sources
+- Quotable Claims (from RSS summary - add "[Full article recommended]" if summary lacks quotes)
+- Key Data Points (from RSS summary if available)
 - Human Synthesis (1-2 sentences)
 
 ## Prioritization Rules
