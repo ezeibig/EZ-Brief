@@ -32,22 +32,11 @@
 - Shep Hyken: https://hyken.com/feed/
 - Jeanne Bliss (CustomerBliss): https://customerbliss.com/feed/ (STALE - 2022)
 
-## Executive Search Firms
-- Spencer Stuart Insights: https://www.spencerstuart.com/insights/rss (NO RSS - HTML page)
-- Russell Reynolds Insights: https://www.russellreynolds.com/en/insights/rss (NO RSS - 404)
-- Heidrick & Struggles Insights: https://www.heidrick.com/en/insights/rss (NO RSS - 404)
-
-## VC & Investment Intelligence
-- a16z (Andreessen Horowitz): https://a16z.com/feed/ (NO RSS - 404)
-- Bessemer Cloud Index / Insights: https://www.bvp.com/atlas/rss (NO RSS - HTML page)
-- CB Insights: https://www.cbinsights.com/research/feed/ (BLOCKED - CloudFront 403)
-
 ## Tech Strategy & Analysis
-- Stratechery (Ben Thompson): https://stratechery.com/feed/ (ACTIVE)
-- Lenny's Newsletter: https://www.lennysnewsletter.com/feed (ACTIVE)
-- MIT Technology Review: https://www.technologyreview.com/feed/ (ACTIVE)
+- Stratechery (Ben Thompson): https://stratechery.com/feed/
+- Lenny's Newsletter: https://www.lennysnewsletter.com/feed
+- MIT Technology Review: https://www.technologyreview.com/feed/
 - AI Daily Brief: https://aidailybrief.beehiiv.com/ (NO RSS - Beehiiv, no feed endpoint found)
 
 ## Policy & Research
-- Brookings TechStream: https://www.brookings.edu/topic/technology-innovation/feed/ (NO RSS - HTML)
-- EU AI Act: https://artificialintelligenceact.eu/feed/ (ACTIVE - slower updates)
+- EU AI Act: https://artificialintelligenceact.eu/feed/
