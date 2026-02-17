@@ -22,6 +22,7 @@
 
 ## AI & Marketing Influencers
 - Marketing AI Institute: https://www.marketingaiinstitute.com/blog/rss.xml
+- CMO Confidential: https://cmoconfidential.substack.com/feed (ACTIVE - marketing leadership, CMO strategy, B2B)
 - Pam Didner (B2B Marketing): https://pamdidner.libsyn.com/rss (podcast only)
 - Scott Brinker (ChiefMartec): https://chiefmartec.com/feed/
 - Cassie Kozyrkov (Data Science): https://medium.com/feed/@kozyrkov (FAILED - auth required)
@@ -45,6 +46,7 @@
 - Stratechery (Ben Thompson): https://stratechery.com/feed/ (ACTIVE)
 - Lenny's Newsletter: https://www.lennysnewsletter.com/feed (ACTIVE)
 - MIT Technology Review: https://www.technologyreview.com/feed/ (ACTIVE)
+- AI Daily Brief: https://aidailybrief.beehiiv.com/ (NO RSS - Beehiiv, no feed endpoint found)
 
 ## Policy & Research
 - Brookings TechStream: https://www.brookings.edu/topic/technology-innovation/feed/ (NO RSS - HTML)
