@@ -28,7 +28,7 @@ except ImportError:
 # Configuration
 load_dotenv()
 API_KEY = os.getenv("MISTRAL_API_KEY")
-MODEL = "mistral-large"
+MODEL = "mistral-large-latest"
 BASE_DIR  = Path(__file__).parent          # Mistral/ — inputs live here
 REPO_ROOT = BASE_DIR.parent               # EZ-Brief/ — grounding/ and logs/ live here
 
@@ -174,16 +174,23 @@ RESPOND ONLY with valid JSON (no markdown, no explanation):
         print(f"\n🤖 Scoring {len(self.articles)} articles with Mistral...")
         scored = []
         
+        api_errors = 0
         for i, article in enumerate(self.articles, 1):
             print(f"  [{i}/{len(self.articles)}] {article['title'][:50]}...", end=" ")
             result = self.score_article(article)
-            if result and result.get("total_score", 0) >= 10:
+            if result is None:
+                api_errors += 1
+                print(f"→ API ERROR (failed to score)")
+            elif result.get("total_score", 0) >= 10:
                 scored.append(result)
                 print(f"→ Score: {result['total_score']}/17 ✓")
             else:
-                score = result.get("total_score", 0) if result else 0
-                print(f"→ Score: {score}/17 (filtered out)")
-        
+                print(f"→ Score: {result['total_score']}/17 (filtered out)")
+
+        if api_errors > 0:
+            print(f"\n⚠️  WARNING: {api_errors}/{len(self.articles)} articles failed to score (API errors)")
+            print("   Check MISTRAL_API_KEY and model name if all articles failed.")
+
         self.scored_articles = sorted(scored, key=lambda x: x["total_score"], reverse=True)
         print(f"\n✓ {len(self.scored_articles)} articles scored ≥10\n")
     
