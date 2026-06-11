@@ -1,0 +1,39 @@
+name: EZ-Brief Weekly Run
+
+on:
+  schedule:
+    # Every Monday at 08:00 UTC (4am ET / 1am PT)
+    - cron: '0 8 * * 1'
+  workflow_dispatch:  # allow manual trigger from GitHub UI
+
+jobs:
+  run-ez-brief:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install mistralai feedparser python-dotenv requests
+
+      - name: Run EZ-Brief
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: |
+          python Mistral/ez_brief_mistral.py
+
+      - name: Commit and push output
+        run: |
+          git config user.name "EZ-Brief Bot"
+          git config user.email "actions@github.com"
+          git add grounding/ logs/
+          git diff --cached --quiet && echo "No changes to commit" || \
+            git commit -m "Week of $(date +%Y-%m-%d) — automated run"
+          git push
