@@ -6,6 +6,9 @@ on:
     - cron: '0 8 * * 1'
   workflow_dispatch:  # allow manual trigger from GitHub UI
 
+permissions:
+  contents: write   # required so the bot can commit and push output files
+
 jobs:
   run-ez-brief:
     runs-on: ubuntu-latest
@@ -21,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mistralai feedparser python-dotenv requests
+          pip install "mistralai>=1.0.0,<2.0.0" feedparser python-dotenv requests
 
       - name: Run EZ-Brief
         env:
@@ -34,6 +37,9 @@ jobs:
           git config user.name "EZ-Brief Bot"
           git config user.email "actions@github.com"
           git add grounding/ logs/
-          git diff --cached --quiet && echo "No changes to commit" || \
+          if git diff --cached --quiet; then
+            echo "No new articles — nothing to commit"
+          else
             git commit -m "Week of $(date +%Y-%m-%d) — automated run"
-          git push
+            git push
+          fi
