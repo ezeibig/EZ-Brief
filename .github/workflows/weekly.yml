@@ -31,16 +31,17 @@
           run: |
             python Mistral/ez_brief_mistral.py
 
-        - name: Commit and push output
+               - name: Commit and push output
           run: |
             git config user.name "EZ-Brief Bot"
             git config user.email "actions@github.com"
+            git fetch origin main
+            git rebase origin/main
             git add grounding/ logs/
             if git diff --cached --quiet; then
               echo "No new articles — nothing to commit"
             else
               git commit -m "Week of $(date +%Y-%m-%d) — automated run"
-              git pull --rebase origin main
               git push
             fi
 
