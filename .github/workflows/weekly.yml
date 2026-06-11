@@ -40,6 +40,7 @@
               echo "No new articles — nothing to commit"
             else
               git commit -m "Week of $(date +%Y-%m-%d) — automated run"
+              git pull --rebase origin main
               git push
             fi
 
