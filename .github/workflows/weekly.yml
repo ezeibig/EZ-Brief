@@ -42,7 +42,7 @@ jobs:
           else
             git commit -m "Week of $(date +%Y-%m-%d) — automated run"
             git push
-          fi
+
  sync-to-context-vault:
       needs: run-ez-brief
       runs-on: ubuntu-latest
