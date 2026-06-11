@@ -31,7 +31,7 @@
           run: |
             python Mistral/ez_brief_mistral.py
 
-               - name: Commit and push output
+        - name: Commit and push output
           run: |
             git config user.name "EZ-Brief Bot"
             git config user.email "actions@github.com"
