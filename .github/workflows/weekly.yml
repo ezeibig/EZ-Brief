@@ -1,80 +1,80 @@
-  name: EZ-Brief Weekly Run
+name: EZ-Brief Weekly Run
 
-  on:
-    schedule:
-      - cron: '0 8 * * 1'
-    workflow_dispatch:
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
 
-  permissions:
-    contents: write
+permissions:
+  contents: write
 
-  jobs:
-    run-ez-brief:
-      runs-on: ubuntu-latest
+jobs:
+  run-ez-brief:
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout repo
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-        - name: Set up Python
-          uses: actions/setup-python@v5
-          with:
-            python-version: '3.11'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-        - name: Install dependencies
-          run: |
-            pip install "mistralai>=1.0.0,<2.0.0" feedparser python-dotenv requests
+      - name: Install dependencies
+        run: |
+          pip install "mistralai>=1.0.0,<2.0.0" feedparser python-dotenv requests
 
-        - name: Run EZ-Brief
-          env:
-            MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-          run: |
-            python Mistral/ez_brief_mistral.py
+      - name: Run EZ-Brief
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: |
+          python Mistral/ez_brief_mistral.py
 
-        - name: Commit and push output
-          run: |
-            git config user.name "EZ-Brief Bot"
-            git config user.email "actions@github.com"
-            git fetch origin main
-            git rebase origin/main
-            git add grounding/ logs/
-            if git diff --cached --quiet; then
-              echo "No new articles — nothing to commit"
-            else
-              git commit -m "Week of $(date +%Y-%m-%d) — automated run"
-              git push
-            fi
+      - name: Commit and push output
+        run: |
+          git config user.name "EZ-Brief Bot"
+          git config user.email "actions@github.com"
+          git fetch origin main
+          git rebase origin/main
+          git add grounding/ logs/
+          if git diff --cached --quiet; then
+            echo "No new articles -- nothing to commit"
+          else
+            git commit -m "Week of $(date +%Y-%m-%d) -- automated run"
+            git push
+          fi
 
-    sync-to-context-vault:
-      needs: run-ez-brief
-      runs-on: ubuntu-latest
-      if: needs.run-ez-brief.result == 'success'
+  sync-to-context-vault:
+    needs: run-ez-brief
+    runs-on: ubuntu-latest
+    if: needs.run-ez-brief.result == 'success'
 
-      steps:
-        - name: Checkout EZ-Brief
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout EZ-Brief
+        uses: actions/checkout@v4
 
-        - name: Checkout context-vault
-          uses: actions/checkout@v4
-          with:
-            repository: ezeibig/context-vault
-            token: ${{ secrets.CONTEXT_VAULT_PAT }}
-            path: context-vault
+      - name: Checkout context-vault
+        uses: actions/checkout@v4
+        with:
+          repository: ezeibig/context-vault
+          token: ${{ secrets.CONTEXT_VAULT_PAT }}
+          path: context-vault
 
-        - name: Copy digest to context-vault
-          run: |
-            mkdir -p context-vault/vault/90-sources/ez-brief
-            cp grounding/latest.md context-vault/vault/90-sources/ez-brief/latest.md
+      - name: Copy digest to context-vault
+        run: |
+          mkdir -p context-vault/vault/90-sources/ez-brief
+          cp grounding/latest.md context-vault/vault/90-sources/ez-brief/latest.md
 
-        - name: Commit and push to context-vault
-          run: |
-            cd context-vault
-            git config user.name "EZ-Brief Sync Bot"
-            git config user.email "actions@github.com"
-            git add vault/90-sources/ez-brief/latest.md
-            if git diff --cached --quiet; then
-              echo "No changes — nothing to commit"
-            else
-              git commit -m "ez-brief: weekly digest sync $(date +%Y-%m-%d)"
-              git push
-            fi
+      - name: Commit and push to context-vault
+        run: |
+          cd context-vault
+          git config user.name "EZ-Brief Sync Bot"
+          git config user.email "actions@github.com"
+          git add vault/90-sources/ez-brief/latest.md
+          if git diff --cached --quiet; then
+            echo "No changes -- nothing to commit"
+          else
+            git commit -m "ez-brief: weekly digest sync $(date +%Y-%m-%d)"
+            git push
+          fi
