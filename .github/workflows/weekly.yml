@@ -43,3 +43,36 @@ jobs:
             git commit -m "Week of $(date +%Y-%m-%d) — automated run"
             git push
           fi
+ sync-to-context-vault:
+      needs: run-ez-brief
+      runs-on: ubuntu-latest
+      if: needs.run-ez-brief.result == 'success'
+
+      steps:
+        - name: Checkout EZ-Brief
+          uses: actions/checkout@v4
+
+        - name: Checkout context-vault
+          uses: actions/checkout@v4
+          with:
+            repository: ezeibig/context-vault
+            token: ${{ secrets.CONTEXT_VAULT_PAT }}
+            path: context-vault
+
+        - name: Copy digest to context-vault
+          run: |
+            mkdir -p context-vault/vault/90-sources/ez-brief
+            cp grounding/latest.md context-vault/vault/90-sources/ez-brief/latest.md
+
+        - name: Commit and push to context-vault
+          run: |
+            cd context-vault
+            git config user.name "EZ-Brief Sync Bot"
+            git config user.email "actions@github.com"
+            git add vault/90-sources/ez-brief/latest.md
+            if git diff --cached --quiet; then
+              echo "No changes — nothing to commit"
+            else
+              git commit -m "ez-brief: weekly digest sync $(date +%Y-%m-%d)"
+              git push
+            fi
