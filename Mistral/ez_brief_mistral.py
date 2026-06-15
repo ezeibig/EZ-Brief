@@ -11,6 +11,7 @@ Usage:
 import os
 import sys
 import json
+import time
 import feedparser
 import requests
 from datetime import datetime
@@ -177,6 +178,8 @@ RESPOND ONLY with valid JSON (no markdown, no explanation):
         api_errors = 0
         for i, article in enumerate(self.articles, 1):
             print(f"  [{i}/{len(self.articles)}] {article['title'][:50]}...", end=" ")
+            if i > 1:
+                time.sleep(13)
             result = self.score_article(article)
             if result is None:
                 api_errors += 1
