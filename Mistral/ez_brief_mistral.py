@@ -342,7 +342,7 @@ if __name__ == "__main__":
         sys.exit(1)
     
     # Parse arguments
-    model = "mistral-large"
+    model = MODEL
     if "--model" in sys.argv:
         idx = sys.argv.index("--model")
         if idx + 1 < len(sys.argv):
