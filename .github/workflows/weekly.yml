@@ -42,7 +42,7 @@ jobs:
             echo "No new articles -- nothing to commit"
           else
             git commit -m "Week of $(date +%Y-%m-%d) -- automated run"
-            git push
+            git push origin HEAD:main
           fi
 
   sync-to-context-vault:
@@ -76,5 +76,5 @@ jobs:
             echo "No changes -- nothing to commit"
           else
             git commit -m "ez-brief: weekly digest sync $(date +%Y-%m-%d)"
-            git push
+            git push origin HEAD:main
           fi
