@@ -62,4 +62,4 @@ Each scored article must include:
 
 - Scoring rubric: `inputs/relevance_scoring_rubric.md`
 - RSS feeds: `inputs/rss_feeds.md`
-- Profile context: `inputs/profile_summary.md`
+- Profile context: `inputs/profile_summary.md` (kept on the local machine only; gitignored, never pushed)

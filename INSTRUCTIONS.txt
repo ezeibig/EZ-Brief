@@ -14,7 +14,7 @@ EZ-Brief/
 ├── inputs/
 │   ├── relevance_scoring_rubric.md   # 17-point scoring methodology
 │   ├── rss_feeds.md                   # Master list of sources
-│   ├── profile_summary.md             # Your profile context
+│   ├── profile_summary.md             # Your profile context (local only, gitignored)
 │   └── weekly_prompt.md               # Workflow instructions (edit this to modify process)
 ├── grounding/
 │   ├── YYYY-MM-DD_scored_articles.md  # Weekly scored output (archived)

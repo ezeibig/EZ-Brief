@@ -1,0 +1,4 @@
+# Personal context stays on the local machine; this repo is public.
+inputs/profile_summary.md
+.env
+.DS_Store
